@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Immortal Path</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #080b12;
+        color: white;
+    }
+
+    .header {
+        padding: 22px;
+        text-align: center;
+        background: #111827;
+        border-bottom: 1px solid #263244;
+    }
+
+    .header h1 {
+        margin: 0;
+        font-size: 28px;
+    }
+
+    .header p {
+        margin: 8px 0 0;
+        color: #9ca3af;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 18px;
+    }
+
+    .card {
+        background: #111827;
+        border: 1px solid #263244;
+        border-radius: 15px;
+        padding: 18px;
+        margin-bottom: 15px;
+    }
+
+    .character {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .realm {
+        color: #60a5fa;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .level {
+        color: #9ca3af;
+        margin-top: 5px;
+    }
+
+    .progress-container {
+        height: 15px;
+        background: #263244;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-top: 15px;
+    }
+
+    .progress {
+        height: 100%;
+        width: 0%;
+        background: #3b82f6;
+        transition: width 0.3s;
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .stat {
+        background: #0b1220;
+        padding: 13px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .stat span {
+        display: block;
+        color: #9ca3af;
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+
+    button {
+        width: 100%;
+        border: none;
+        border-radius: 12px;
+        padding: 15px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .cultivate {
+        background: #2563eb;
+        color: white;
+    }
+
+    .breakthrough {
+        background: #7c3aed;
+        color: white;
+    }
+
+    button:active {
+        transform: scale(0.98);
+    }
+
+    button:disabled {
+        background: #374151;
+        color: #9ca3af;
+        cursor: not-allowed;
+    }
+
+    .log {
+        max-height: 180px;
+        overflow-y: auto;
+        font-size: 14px;
+    }
+
+    .log p {
+        margin: 8px 0;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #263244;
+    }
+
+    .success {
+        color: #34d399;
+    }
+
+    .warning {
+        color: #fbbf24;
+    }
+
+    .danger {
+        color: #f87171;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>⚔️ Immortal Path</h1>
+    <p>Walk the path of cultivation</p>
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <div class="character">
+            <div>
+                <div class="realm" id="realm">Qi Condensation</div>
+                <div class="level" id="stage">Stage 1</div>
+            </div>
+
+            <div style="font-size:40px;">🧘</div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <p id="expText">0 / 100 EXP</p>
+    </div>
+
+
+    <div class="card">
+
+        <div class="stats">
+
+            <div class="stat">
+                <span>Spirit Stones</span>
+                <strong id="stones">100</strong>
+            </div>
+
+            <div class="stat">
+                <span>Power</span>
+                <strong id="power">10</strong>
+            </div>
+
+        </div>
+
+        <button class="cultivate" onclick="cultivate()">
+            🌀 Cultivate
+        </button>
+
+        <button class="breakthrough" id="breakthroughButton"
+                onclick="breakthrough()" disabled>
+            ⚡ Attempt Breakthrough
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>📜 Cultivation Log</h3>
+
+        <div class="log" id="log">
+            <p>Welcome, cultivator.</p>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let exp = 0;
+let stage = 1;
+let stones = 100;
+let power = 10;
+
+const realms = [
+    "Qi Condensation",
+    "Foundation Establishment",
+    "Core Formation",
+    "Nascent Soul",
+    "Spirit Severing",
+    "Soul Transformation",
+    "Ascendant",
+    "Immortal"
+];
+
+function cultivate() {
+
+    if (stones <= 0) {
+        addLog("You have no spirit stones left.", "danger");
+        return;
+    }
+
+    let gain = Math.floor(Math.random() * 16) + 10;
+
+    exp += gain;
+    stones -= 1;
+
+    addLog(
+        "You cultivated and gained " + gain + " EXP.",
+        "success"
+    );
+
+    update();
+
+}
+
+
+function breakthrough() {
+
+    if (exp < 100) {
+        addLog("You need more EXP before attempting a breakthrough.", "warning");
+        return;
+    }
+
+    let chance = Math.random();
+
+    if (chance < 0.7) {
+
+        stage++;
+        exp = 0;
+        power += 10;
+
+        addLog(
+            "🔥 Breakthrough successful! You reached Stage " + stage + ".",
+            "success"
+        );
+
+    } else {
+
+        exp = Math.floor(exp * 0.5);
+
+        addLog(
+            "⚠️ Breakthrough failed. Your cultivation foundation was shaken.",
+            "danger"
+        );
+    }
+
+    update();
+}
+
+
+function update() {
+
+    let realmIndex = Math.floor((stage - 1) / 9);
+
+    if (realmIndex >= realms.length) {
+        realmIndex = realms.length - 1;
+    }
+
+    document.getElementById("realm").textContent =
+        realms[realmIndex];
+
+    document.getElementById("stage").textContent =
+        "Stage " + stage;
+
+    document.getElementById("expText").textContent =
+        exp + " / 100 EXP";
+
+    let percentage = Math.min(exp, 100);
+
+    document.getElementById("progress").style.width =
+        percentage + "%";
+
+    document.getElementById("stones").textContent =
+        stones;
+
+    document.getElementById("power").textContent =
+        power;
+
+    document.getElementById("breakthroughButton").disabled =
+        exp < 100;
+}
+
+
+function addLog(message, type) {
+
+    const log = document.getElementById("log");
+
+    const p = document.createElement("p");
+
+    p.textContent = message;
+
+    if (type) {
+        p.classList.add(type);
+    }
+
+    log.prepend(p);
+}
+
+
+update();
+
+</script>
+
+</body>
+</html>
