@@ -14,7 +14,8 @@
 
 body {
     font-family: Georgia, serif;
-    background: radial-gradient(circle at top, #20243a, #080910 70%);
+    background:
+        radial-gradient(circle at top, #252a45 0%, #0b0d16 55%, #05060a 100%);
     color: #eee;
     min-height: 100vh;
     padding: 20px;
@@ -27,12 +28,13 @@ body {
 
 .title {
     text-align: center;
-    margin-bottom: 25px;
+    margin: 15px 0 25px;
 }
 
 .title h1 {
     font-size: 34px;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
+    text-shadow: 0 0 18px rgba(160,140,255,.45);
 }
 
 .title p {
@@ -42,12 +44,12 @@ body {
 }
 
 .card {
-    background: rgba(20, 22, 35, 0.95);
-    border: 1px solid #393d58;
+    background: rgba(17, 19, 31, .96);
+    border: 1px solid #383d5c;
     border-radius: 18px;
     padding: 20px;
     margin-bottom: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    box-shadow: 0 12px 30px rgba(0,0,0,.35);
 }
 
 .character {
@@ -55,26 +57,27 @@ body {
 }
 
 .avatar {
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
+    width: 82px;
+    height: 82px;
     margin: auto;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 36px;
-    background: #292d46;
-    border: 2px solid #777da5;
+    font-size: 38px;
+    background: radial-gradient(circle, #454b73, #1c1f32);
+    border: 2px solid #8c83c9;
+    box-shadow: 0 0 25px rgba(130,110,220,.25);
 }
 
 .name {
-    font-size: 22px;
-    margin-top: 12px;
+    font-size: 23px;
+    margin-top: 13px;
 }
 
 .realm {
     color: #b8a5ff;
-    margin-top: 5px;
+    margin-top: 6px;
 }
 
 .progress-container {
@@ -91,7 +94,7 @@ body {
 
 .progress {
     height: 12px;
-    background: #0c0d14;
+    background: #090a10;
     border-radius: 10px;
     overflow: hidden;
 }
@@ -99,8 +102,8 @@ body {
 .progress-bar {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #7057d9, #bda9ff);
-    transition: width 0.4s;
+    background: linear-gradient(90deg, #6550d0, #c0adff);
+    transition: width .35s;
 }
 
 .buttons {
@@ -110,18 +113,17 @@ body {
 
 button {
     width: 100%;
-    border: none;
+    border: 0;
     border-radius: 12px;
     padding: 16px;
+    color: white;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    color: white;
-    background: #343952;
 }
 
 button:active {
-    transform: scale(0.98);
+    transform: scale(.98);
 }
 
 .cultivate {
@@ -141,7 +143,7 @@ button:active {
 
 .stat {
     text-align: center;
-    background: #11131e;
+    background: #10121d;
     border-radius: 12px;
     padding: 13px 5px;
 }
@@ -173,7 +175,76 @@ button:active {
     text-align: center;
     color: #666;
     font-size: 11px;
-    margin-top: 25px;
+    margin: 25px 0;
+}
+
+/* CHARACTER CREATION */
+
+.creation {
+    display: none;
+}
+
+.creation h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.creation-subtitle {
+    text-align: center;
+    color: #999;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    color: #bbb;
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #3d4260;
+    background: #0b0d16;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 16px;
+}
+
+input:focus {
+    border-color: #8174d2;
+}
+
+.talent-box {
+    background: #0d0f1a;
+    border: 1px solid #353a54;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.talent-name {
+    font-size: 20px;
+    color: #c2b4ff;
+    margin: 7px 0;
+}
+
+.talent-description {
+    font-size: 12px;
+    color: #999;
+}
+
+.begin {
+    background: linear-gradient(135deg, #5a3bb8, #9a70ed);
+}
+
+.hidden {
+    display: none;
 }
 </style>
 </head>
@@ -187,83 +258,138 @@ button:active {
         <p>Walk the path of cultivation.</p>
     </div>
 
-    <div class="card character">
 
-        <div class="avatar">☯</div>
+    <!-- CHARACTER CREATION -->
 
-        <div class="name">Nameless Cultivator</div>
+    <div class="card creation" id="creationScreen">
 
-        <div class="realm" id="realm">
-            Qi Condensation — Early Stage
+        <h2>Begin Your Journey</h2>
+
+        <div class="creation-subtitle">
+            Every immortal begins as a mortal.
         </div>
 
-        <div class="progress-container">
+        <label for="playerName">Cultivator Name</label>
 
-            <div class="progress-text">
-                <span>Qi</span>
-                <span id="qiText">0 / 100</span>
+        <input
+            type="text"
+            id="playerName"
+            placeholder="Enter your name..."
+            maxlength="20"
+        >
+
+        <div class="talent-box">
+
+            <div>Innate Talent</div>
+
+            <div class="talent-name" id="talentName">
+                Unknown
             </div>
 
-            <div class="progress">
-                <div class="progress-bar" id="qiBar"></div>
+            <div class="talent-description" id="talentDescription">
+                Your destiny has not yet been revealed.
+            </div>
+
+        </div>
+
+        <button class="begin" onclick="beginJourney()">
+            ✨ Begin Journey
+        </button>
+
+    </div>
+
+
+    <!-- GAME -->
+
+    <div id="gameScreen" class="hidden">
+
+        <div class="card character">
+
+            <div class="avatar">☯</div>
+
+            <div class="name" id="playerDisplay">
+                Cultivator
+            </div>
+
+            <div class="realm" id="realm">
+                Qi Condensation — Early Stage
+            </div>
+
+            <div class="progress-container">
+
+                <div class="progress-text">
+                    <span>Qi</span>
+                    <span id="qiText">0 / 100</span>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar" id="qiBar"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="buttons">
+
+                <button class="cultivate" onclick="cultivate()">
+                    ⚡ Cultivate
+                </button>
+
+                <button class="breakthrough" onclick="breakthrough()">
+                    ☯ Attempt Breakthrough
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Attributes</h3>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <div class="stat-value" id="power">10</div>
+                    <div class="stat-label">POWER</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-value" id="cultivation">0</div>
+                    <div class="stat-label">CULTIVATION</div>
+                </div>
+
+                <div class="stat">
+                    <div class="stat-value" id="breakthroughs">0</div>
+                    <div class="stat-label">BREAKTHROUGHS</div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Cultivation Log</h3>
+
+            <div class="log" id="log">
+
+                <div class="log-entry">
+                    Your journey has begun...
+                </div>
+
             </div>
 
         </div>
 
     </div>
 
-    <div class="card">
-
-        <div class="buttons">
-
-            <button class="cultivate" onclick="cultivate()">
-                ⚡ Cultivate
-            </button>
-
-            <button class="breakthrough" onclick="breakthrough()">
-                ☯ Attempt Breakthrough
-            </button>
-
-        </div>
-
-    </div>
-
-    <div class="card">
-
-        <h3>Attributes</h3>
-
-        <div class="stats">
-
-            <div class="stat">
-                <div class="stat-value" id="power">10</div>
-                <div class="stat-label">POWER</div>
-            </div>
-
-            <div class="stat">
-                <div class="stat-value" id="cultivation">0</div>
-                <div class="stat-label">CULTIVATION</div>
-            </div>
-
-            <div class="stat">
-                <div class="stat-value" id="breakthroughs">0</div>
-                <div class="stat-label">BREAKTHROUGHS</div>
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="card">
-
-        <h3>Cultivation Log</h3>
-
-        <div class="log" id="log">
-            <div class="log-entry">
-                Your journey has begun...
-            </div>
-        </div>
-
-    </div>
 
     <div class="footer">
         Immortal Path • Prototype
@@ -271,52 +397,226 @@ button:active {
 
 </div>
 
+
 <script>
+
+/* =========================
+   GAME DATA
+========================= */
 
 let qi = 0;
 let maxQi = 100;
+
 let power = 10;
 let cultivation = 0;
 let breakthroughs = 0;
 
 let realmIndex = 0;
 
+let playerName = "";
+
+let talent = null;
+
+
 const realms = [
+
     "Qi Condensation — Early Stage",
+
     "Foundation Establishment",
+
     "Core Formation",
+
     "Nascent Soul",
+
     "Soul Formation",
+
     "Ascendant",
+
     "Immortal"
+
 ];
+
+
+/* =========================
+   TALENTS
+========================= */
+
+const talents = [
+
+    {
+        name: "Mortal Talent",
+        description: "An ordinary talent. Your path will be difficult.",
+        multiplier: 1
+    },
+
+    {
+        name: "Spiritual Root",
+        description: "Your cultivation speed is slightly increased.",
+        multiplier: 1.25
+    },
+
+    {
+        name: "Heavenly Root",
+        description: "A rare talent blessed by the heavens.",
+        multiplier: 1.5
+    },
+
+    {
+        name: "Ancient Bloodline",
+        description: "An ancient power sleeps within your blood.",
+        multiplier: 1.75
+    },
+
+    {
+        name: "Immortal Physique",
+        description: "A legendary physique rarely seen in history.",
+        multiplier: 2
+    }
+
+];
+
+
+/* =========================
+   INITIAL SCREEN
+========================= */
+
+window.onload = function() {
+
+    const savedName = localStorage.getItem("immortalPathName");
+
+    if (savedName) {
+
+        playerName = savedName;
+
+        document.getElementById("creationScreen").style.display = "none";
+
+        document.getElementById("gameScreen").classList.remove("hidden");
+
+        document.getElementById("playerDisplay").innerText =
+            playerName;
+
+    } else {
+
+        document.getElementById("creationScreen").style.display =
+            "block";
+
+        generateTalent();
+
+    }
+
+};
+
+
+/* =========================
+   GENERATE TALENT
+========================= */
+
+function generateTalent() {
+
+    talent =
+        talents[Math.floor(Math.random() * talents.length)];
+
+    document.getElementById("talentName").innerText =
+        talent.name;
+
+    document.getElementById("talentDescription").innerText =
+        talent.description;
+
+}
+
+
+/* =========================
+   BEGIN JOURNEY
+========================= */
+
+function beginJourney() {
+
+    const nameInput =
+        document.getElementById("playerName").value.trim();
+
+    if (nameInput === "") {
+
+        alert("Please enter your cultivator name.");
+
+        return;
+
+    }
+
+    playerName = nameInput;
+
+    localStorage.setItem(
+        "immortalPathName",
+        playerName
+    );
+
+    document.getElementById("creationScreen").style.display =
+        "none";
+
+    document.getElementById("gameScreen").classList.remove("hidden");
+
+    document.getElementById("playerDisplay").innerText =
+        playerName;
+
+    addLog(
+        "Your cultivation journey has begun."
+    );
+
+    addLog(
+        "Innate Talent: " + talent.name
+    );
+
+}
+
+
+/* =========================
+   CULTIVATE
+========================= */
 
 function cultivate() {
 
-    let gain = Math.floor(Math.random() * 31) + 20;
+    let baseGain =
+        Math.floor(Math.random() * 31) + 20;
+
+    let gain =
+        Math.floor(baseGain * talent.multiplier);
 
     qi += gain;
+
     cultivation += gain;
 
     if (qi > maxQi) {
+
         qi = maxQi;
+
     }
 
     update();
 
     addLog(
-        "You cultivated and gained " + gain + " Qi."
+        "You cultivated and gained " +
+        gain +
+        " Qi."
     );
+
 }
+
+
+/* =========================
+   BREAKTHROUGH
+========================= */
 
 function breakthrough() {
 
     if (realmIndex >= realms.length - 1) {
 
-        addLog("You have reached the Immortal Realm.");
+        addLog(
+            "You have reached the Immortal Realm."
+        );
 
         return;
+
     }
+
 
     if (qi < maxQi) {
 
@@ -325,9 +625,12 @@ function breakthrough() {
         );
 
         return;
+
     }
 
+
     let chance = Math.random();
+
 
     if (chance < 0.70) {
 
@@ -341,22 +644,38 @@ function breakthrough() {
 
         maxQi += 100;
 
+
         addLog(
-            "BREAKTHROUGH SUCCESSFUL! You entered " +
-            realms[realmIndex] + "."
+            "BREAKTHROUGH SUCCESSFUL!"
         );
 
-    } else {
+        addLog(
+            "You entered " +
+            realms[realmIndex] +
+            "."
+        );
+
+    }
+
+    else {
 
         qi = Math.floor(qi * 0.5);
 
         addLog(
             "Breakthrough failed. Your Qi was damaged."
         );
+
     }
 
+
     update();
+
 }
+
+
+/* =========================
+   UPDATE UI
+========================= */
 
 function update() {
 
@@ -377,28 +696,37 @@ function update() {
 
     document.getElementById("breakthroughs").innerText =
         breakthroughs;
+
 }
+
+
+/* =========================
+   CULTIVATION LOG
+========================= */
 
 function addLog(message) {
 
-    const log = document.getElementById("log");
+    const log =
+        document.getElementById("log");
 
-    const entry = document.createElement("div");
+    const entry =
+        document.createElement("div");
 
-    entry.className = "log-entry";
+    entry.className =
+        "log-entry";
 
-    let time = new Date().toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit"
-    });
+    const time =
+        new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit"
+        });
 
     entry.innerText =
         "[" + time + "] " + message;
 
     log.prepend(entry);
-}
 
-update();
+}
 
 </script>
 
