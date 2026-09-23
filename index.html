@@ -14,8 +14,7 @@
 
 body {
     font-family: Georgia, serif;
-    background:
-        radial-gradient(circle at top, #252a45 0%, #0b0d16 55%, #05060a 100%);
+    background: radial-gradient(circle at top, #272b48, #090a11 65%);
     color: #eee;
     min-height: 100vh;
     padding: 20px;
@@ -44,8 +43,8 @@ body {
 }
 
 .card {
-    background: rgba(17, 19, 31, .96);
-    border: 1px solid #383d5c;
+    background: rgba(17,19,31,.97);
+    border: 1px solid #393e5c;
     border-radius: 18px;
     padding: 20px;
     margin-bottom: 16px;
@@ -67,7 +66,6 @@ body {
     font-size: 38px;
     background: radial-gradient(circle, #454b73, #1c1f32);
     border: 2px solid #8c83c9;
-    box-shadow: 0 0 25px rgba(130,110,220,.25);
 }
 
 .name {
@@ -102,7 +100,7 @@ body {
 .progress-bar {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #6550d0, #c0adff);
+    background: linear-gradient(90deg,#6550d0,#c0adff);
     transition: width .35s;
 }
 
@@ -127,16 +125,20 @@ button:active {
 }
 
 .cultivate {
-    background: linear-gradient(135deg, #5541a8, #8066e8);
+    background: linear-gradient(135deg,#5541a8,#8066e8);
 }
 
 .breakthrough {
-    background: linear-gradient(135deg, #8c5b25, #c68a3d);
+    background: linear-gradient(135deg,#8c5b25,#c68a3d);
+}
+
+.technique {
+    background: linear-gradient(135deg,#246b68,#359b95);
 }
 
 .stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3,1fr);
     gap: 10px;
     margin-top: 15px;
 }
@@ -159,8 +161,27 @@ button:active {
     margin-top: 5px;
 }
 
+.technique-box {
+    background: #10131f;
+    border: 1px solid #303650;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 12px;
+}
+
+.technique-name {
+    color: #7de0d7;
+    font-size: 18px;
+}
+
+.technique-desc {
+    color: #999;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
 .log {
-    max-height: 180px;
+    max-height: 190px;
     overflow-y: auto;
 }
 
@@ -177,8 +198,6 @@ button:active {
     font-size: 11px;
     margin: 25px 0;
 }
-
-/* CHARACTER CREATION */
 
 .creation {
     display: none;
@@ -215,10 +234,6 @@ input {
     margin-bottom: 16px;
 }
 
-input:focus {
-    border-color: #8174d2;
-}
-
 .talent-box {
     background: #0d0f1a;
     border: 1px solid #353a54;
@@ -240,7 +255,7 @@ input:focus {
 }
 
 .begin {
-    background: linear-gradient(135deg, #5a3bb8, #9a70ed);
+    background: linear-gradient(135deg,#5a3bb8,#9a70ed);
 }
 
 .hidden {
@@ -253,147 +268,216 @@ input:focus {
 
 <div class="container">
 
-    <div class="title">
-        <h1>IMMORTAL PATH</h1>
-        <p>Walk the path of cultivation.</p>
-    </div>
+<div class="title">
+<h1>IMMORTAL PATH</h1>
+<p>Walk the path of cultivation.</p>
+</div>
+
+<!-- CHARACTER CREATION -->
+
+<div class="card creation" id="creationScreen">
+
+<h2>Begin Your Journey</h2>
+
+<div class="creation-subtitle">
+Every immortal begins as a mortal.
+</div>
+
+<label for="playerName">Cultivator Name</label>
+
+<input id="playerName"
+type="text"
+placeholder="Enter your name..."
+maxlength="20">
+
+<div class="talent-box">
+
+<div>Innate Talent</div>
+
+<div class="talent-name" id="talentName">
+Unknown
+</div>
+
+<div class="talent-description" id="talentDescription">
+Your destiny has not yet been revealed.
+</div>
+
+</div>
+
+<button class="begin" onclick="beginJourney()">
+✨ Begin Journey
+</button>
+
+</div>
 
 
-    <!-- CHARACTER CREATION -->
+<!-- GAME -->
 
-    <div class="card creation" id="creationScreen">
+<div id="gameScreen" class="hidden">
 
-        <h2>Begin Your Journey</h2>
+<div class="card character">
 
-        <div class="creation-subtitle">
-            Every immortal begins as a mortal.
-        </div>
+<div class="avatar">☯</div>
 
-        <label for="playerName">Cultivator Name</label>
+<div class="name" id="playerDisplay">
+Cultivator
+</div>
 
-        <input
-            type="text"
-            id="playerName"
-            placeholder="Enter your name..."
-            maxlength="20"
-        >
+<div class="realm" id="realm">
+Qi Condensation — 1st Stage
+</div>
 
-        <div class="talent-box">
+<div class="progress-container">
 
-            <div>Innate Talent</div>
+<div class="progress-text">
 
-            <div class="talent-name" id="talentName">
-                Unknown
-            </div>
+<span>Qi</span>
 
-            <div class="talent-description" id="talentDescription">
-                Your destiny has not yet been revealed.
-            </div>
+<span id="qiText">
+0 / 100
+</span>
 
-        </div>
+</div>
 
-        <button class="begin" onclick="beginJourney()">
-            ✨ Begin Journey
-        </button>
+<div class="progress">
 
-    </div>
+<div class="progress-bar" id="qiBar"></div>
 
+</div>
 
-    <!-- GAME -->
+</div>
 
-    <div id="gameScreen" class="hidden">
-
-        <div class="card character">
-
-            <div class="avatar">☯</div>
-
-            <div class="name" id="playerDisplay">
-                Cultivator
-            </div>
-
-            <div class="realm" id="realm">
-                Qi Condensation — Early Stage
-            </div>
-
-            <div class="progress-container">
-
-                <div class="progress-text">
-                    <span>Qi</span>
-                    <span id="qiText">0 / 100</span>
-                </div>
-
-                <div class="progress">
-                    <div class="progress-bar" id="qiBar"></div>
-                </div>
-
-            </div>
-
-        </div>
+</div>
 
 
-        <div class="card">
+<!-- ACTIONS -->
 
-            <div class="buttons">
+<div class="card">
 
-                <button class="cultivate" onclick="cultivate()">
-                    ⚡ Cultivate
-                </button>
+<div class="buttons">
 
-                <button class="breakthrough" onclick="breakthrough()">
-                    ☯ Attempt Breakthrough
-                </button>
+<button class="cultivate"
+onclick="cultivate()">
 
-            </div>
+⚡ Cultivate
 
-        </div>
+</button>
 
+<button class="breakthrough"
+onclick="breakthrough()">
 
-        <div class="card">
+☯ Attempt Breakthrough
 
-            <h3>Attributes</h3>
+</button>
 
-            <div class="stats">
+</div>
 
-                <div class="stat">
-                    <div class="stat-value" id="power">10</div>
-                    <div class="stat-label">POWER</div>
-                </div>
-
-                <div class="stat">
-                    <div class="stat-value" id="cultivation">0</div>
-                    <div class="stat-label">CULTIVATION</div>
-                </div>
-
-                <div class="stat">
-                    <div class="stat-value" id="breakthroughs">0</div>
-                    <div class="stat-label">BREAKTHROUGHS</div>
-                </div>
-
-            </div>
-
-        </div>
+</div>
 
 
-        <div class="card">
+<!-- TECHNIQUE -->
 
-            <h3>Cultivation Log</h3>
+<div class="card">
 
-            <div class="log" id="log">
+<h3>📜 Cultivation Technique</h3>
 
-                <div class="log-entry">
-                    Your journey has begun...
-                </div>
+<div class="technique-box">
 
-            </div>
+<div class="technique-name" id="techniqueName">
+Mortal Breathing Art
+</div>
 
-        </div>
+<div class="technique-desc" id="techniqueDescription">
+A simple breathing technique used by ordinary cultivators.
+</div>
 
-    </div>
+</div>
+
+<button class="technique"
+onclick="trainTechnique()">
+
+🔥 Train Technique
+
+</button>
+
+</div>
 
 
-    <div class="footer">
-        Immortal Path • Prototype
-    </div>
+<!-- STATS -->
+
+<div class="card">
+
+<h3>Attributes</h3>
+
+<div class="stats">
+
+<div class="stat">
+
+<div class="stat-value"
+id="power">
+10
+</div>
+
+<div class="stat-label">
+POWER
+</div>
+
+</div>
+
+<div class="stat">
+
+<div class="stat-value"
+id="cultivation">
+0
+</div>
+
+<div class="stat-label">
+CULTIVATION
+</div>
+
+</div>
+
+<div class="stat">
+
+<div class="stat-value"
+id="breakthroughs">
+0
+</div>
+
+<div class="stat-label">
+BREAKTHROUGHS
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- LOG -->
+
+<div class="card">
+
+<h3>Cultivation Log</h3>
+
+<div class="log"
+id="log">
+
+<div class="log-entry">
+Your journey has begun...
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="footer">
+Immortal Path • Cultivation Prototype
+</div>
 
 </div>
 
@@ -401,334 +485,509 @@ input:focus {
 <script>
 
 /* =========================
-   GAME DATA
+GAME VARIABLES
 ========================= */
 
 let qi = 0;
+
 let maxQi = 100;
 
 let power = 10;
+
 let cultivation = 0;
+
 let breakthroughs = 0;
 
 let realmIndex = 0;
+
+let stage = 1;
+
+let techniqueLevel = 1;
 
 let playerName = "";
 
 let talent = null;
 
 
+/* =========================
+REALMS
+========================= */
+
 const realms = [
 
-    "Qi Condensation — Early Stage",
+"Qi Condensation",
 
-    "Foundation Establishment",
+"Foundation Establishment",
 
-    "Core Formation",
+"Core Formation",
 
-    "Nascent Soul",
+"Nascent Soul",
 
-    "Soul Formation",
+"Soul Formation",
 
-    "Ascendant",
+"Ascendant",
 
-    "Immortal"
+"Immortal"
 
 ];
 
 
 /* =========================
-   TALENTS
+TALENTS
 ========================= */
 
 const talents = [
 
-    {
-        name: "Mortal Talent",
-        description: "An ordinary talent. Your path will be difficult.",
-        multiplier: 1
-    },
+{
+name:"Mortal Talent",
+description:"An ordinary talent. The path ahead will be difficult.",
+multiplier:1
+},
 
-    {
-        name: "Spiritual Root",
-        description: "Your cultivation speed is slightly increased.",
-        multiplier: 1.25
-    },
+{
+name:"Spiritual Root",
+description:"Your cultivation speed is slightly increased.",
+multiplier:1.25
+},
 
-    {
-        name: "Heavenly Root",
-        description: "A rare talent blessed by the heavens.",
-        multiplier: 1.5
-    },
+{
+name:"Heavenly Root",
+description:"A rare talent blessed by the heavens.",
+multiplier:1.5
+},
 
-    {
-        name: "Ancient Bloodline",
-        description: "An ancient power sleeps within your blood.",
-        multiplier: 1.75
-    },
+{
+name:"Ancient Bloodline",
+description:"An ancient power sleeps within your blood.",
+multiplier:1.75
+},
 
-    {
-        name: "Immortal Physique",
-        description: "A legendary physique rarely seen in history.",
-        multiplier: 2
-    }
+{
+name:"Immortal Physique",
+description:"A legendary physique rarely seen in history.",
+multiplier:2
+}
 
 ];
 
 
 /* =========================
-   INITIAL SCREEN
+TECHNIQUES
 ========================= */
 
-window.onload = function() {
+const techniques = [
 
-    const savedName = localStorage.getItem("immortalPathName");
+{
+name:"Mortal Breathing Art",
+description:"A simple breathing technique.",
+bonus:1
+},
 
-    if (savedName) {
+{
+name:"Spirit Gathering Art",
+description:"Absorbs spiritual energy more efficiently.",
+bonus:1.2
+},
 
-        playerName = savedName;
+{
+name:"Heavenly Qi Scripture",
+description:"A powerful cultivation scripture.",
+bonus:1.5
+},
 
-        document.getElementById("creationScreen").style.display = "none";
+{
+name:"Ancient Immortal Scripture",
+description:"A forbidden scripture of the ancient immortals.",
+bonus:2
+}
 
-        document.getElementById("gameScreen").classList.remove("hidden");
+];
 
-        document.getElementById("playerDisplay").innerText =
-            playerName;
 
-    } else {
+/* =========================
+LOAD
+========================= */
 
-        document.getElementById("creationScreen").style.display =
-            "block";
+window.onload = function(){
 
-        generateTalent();
+const savedName =
+localStorage.getItem("immortalPathName");
 
-    }
+if(savedName){
+
+playerName = savedName;
+
+document.getElementById("creationScreen")
+.style.display="none";
+
+document.getElementById("gameScreen")
+.classList.remove("hidden");
+
+document.getElementById("playerDisplay")
+.innerText=playerName;
+
+}
+else{
+
+document.getElementById("creationScreen")
+.style.display="block";
+
+generateTalent();
+
+}
+
+update();
 
 };
 
 
 /* =========================
-   GENERATE TALENT
+TALENT
 ========================= */
 
-function generateTalent() {
+function generateTalent(){
 
-    talent =
-        talents[Math.floor(Math.random() * talents.length)];
+talent =
+talents[
+Math.floor(Math.random()*talents.length)
+];
 
-    document.getElementById("talentName").innerText =
-        talent.name;
+document.getElementById("talentName")
+.innerText=talent.name;
 
-    document.getElementById("talentDescription").innerText =
-        talent.description;
+document.getElementById("talentDescription")
+.innerText=talent.description;
 
 }
 
 
 /* =========================
-   BEGIN JOURNEY
+BEGIN
 ========================= */
 
-function beginJourney() {
+function beginJourney(){
 
-    const nameInput =
-        document.getElementById("playerName").value.trim();
+const nameInput =
+document.getElementById("playerName")
+.value.trim();
 
-    if (nameInput === "") {
+if(nameInput===""){
 
-        alert("Please enter your cultivator name.");
+alert("Please enter your cultivator name.");
 
-        return;
+return;
 
-    }
+}
 
-    playerName = nameInput;
+playerName=nameInput;
 
-    localStorage.setItem(
-        "immortalPathName",
-        playerName
-    );
+localStorage.setItem(
+"immortalPathName",
+playerName
+);
 
-    document.getElementById("creationScreen").style.display =
-        "none";
+document.getElementById("creationScreen")
+.style.display="none";
 
-    document.getElementById("gameScreen").classList.remove("hidden");
+document.getElementById("gameScreen")
+.classList.remove("hidden");
 
-    document.getElementById("playerDisplay").innerText =
-        playerName;
+document.getElementById("playerDisplay")
+.innerText=playerName;
 
-    addLog(
-        "Your cultivation journey has begun."
-    );
+addLog(
+"Your cultivation journey has begun."
+);
 
-    addLog(
-        "Innate Talent: " + talent.name
-    );
+addLog(
+"Innate Talent: "+talent.name
+);
 
 }
 
 
 /* =========================
-   CULTIVATE
+CULTIVATE
 ========================= */
 
-function cultivate() {
+function cultivate(){
 
-    let baseGain =
-        Math.floor(Math.random() * 31) + 20;
+let baseGain =
+Math.floor(Math.random()*31)+20;
 
-    let gain =
-        Math.floor(baseGain * talent.multiplier);
+let techniqueBonus =
+techniques[
+Math.min(
+techniqueLevel-1,
+techniques.length-1
+)
+].bonus;
 
-    qi += gain;
+let gain =
+Math.floor(
+baseGain *
+talent.multiplier *
+techniqueBonus
+);
 
-    cultivation += gain;
+qi+=gain;
 
-    if (qi > maxQi) {
+cultivation+=gain;
 
-        qi = maxQi;
+if(qi>maxQi){
 
-    }
+qi=maxQi;
 
-    update();
+}
 
-    addLog(
-        "You cultivated and gained " +
-        gain +
-        " Qi."
-    );
+update();
+
+addLog(
+"You cultivated and gained "+
+gain+
+" Qi."
+);
 
 }
 
 
 /* =========================
-   BREAKTHROUGH
+BREAKTHROUGH
 ========================= */
 
-function breakthrough() {
+function breakthrough(){
 
-    if (realmIndex >= realms.length - 1) {
+if(stage>=9){
 
-        addLog(
-            "You have reached the Immortal Realm."
-        );
+if(realmIndex>=realms.length-1){
 
-        return;
+addLog(
+"You have reached the Immortal Realm."
+);
 
-    }
+return;
 
+}
 
-    if (qi < maxQi) {
+let chance=Math.random();
 
-        addLog(
-            "Your Qi is not sufficient for a breakthrough."
-        );
+if(chance<0.65){
 
-        return;
+realmIndex++;
 
-    }
+stage=1;
 
+qi=0;
 
-    let chance = Math.random();
+maxQi+=300;
 
+power+=100;
 
-    if (chance < 0.70) {
+breakthroughs++;
 
-        realmIndex++;
+addLog(
+"MAJOR BREAKTHROUGH!"
+);
 
-        qi = 0;
+addLog(
+"You entered "+
+realms[realmIndex]+"."
+);
 
-        breakthroughs++;
+}
+else{
 
-        power += 25;
+qi=Math.floor(qi*.5);
 
-        maxQi += 100;
+addLog(
+"Major breakthrough failed."
+);
 
+}
 
-        addLog(
-            "BREAKTHROUGH SUCCESSFUL!"
-        );
+update();
 
-        addLog(
-            "You entered " +
-            realms[realmIndex] +
-            "."
-        );
+return;
 
-    }
-
-    else {
-
-        qi = Math.floor(qi * 0.5);
-
-        addLog(
-            "Breakthrough failed. Your Qi was damaged."
-        );
-
-    }
+}
 
 
-    update();
+if(qi<maxQi){
+
+addLog(
+"Your Qi is not yet full."
+);
+
+return;
+
+}
+
+
+let chance=Math.random();
+
+if(chance<0.70){
+
+stage++;
+
+qi=0;
+
+maxQi+=50;
+
+power+=10;
+
+breakthroughs++;
+
+addLog(
+"Breakthrough successful!"
+);
+
+addLog(
+"Advanced to "+
+realms[realmIndex]+
+" — "+
+stage+
+"th Stage."
+);
+
+}
+else{
+
+qi=Math.floor(qi*.5);
+
+addLog(
+"Breakthrough failed. Qi damaged."
+);
+
+}
+
+update();
 
 }
 
 
 /* =========================
-   UPDATE UI
+TECHNIQUE TRAINING
 ========================= */
 
-function update() {
+function trainTechnique(){
 
-    document.getElementById("qiText").innerText =
-        qi + " / " + maxQi;
+if(techniqueLevel>=techniques.length){
 
-    document.getElementById("qiBar").style.width =
-        ((qi / maxQi) * 100) + "%";
+addLog(
+"Your cultivation technique has reached its current limit."
+);
 
-    document.getElementById("realm").innerText =
-        realms[realmIndex];
+return;
 
-    document.getElementById("power").innerText =
-        power;
+}
 
-    document.getElementById("cultivation").innerText =
-        cultivation;
+if(cultivation<500){
 
-    document.getElementById("breakthroughs").innerText =
-        breakthroughs;
+addLog(
+"You need 500 total cultivation to comprehend a stronger technique."
+);
+
+return;
+
+}
+
+techniqueLevel++;
+
+power+=20;
+
+const technique =
+techniques[techniqueLevel-1];
+
+addLog(
+"Technique advanced to "+
+technique.name+"."
+);
+
+update();
 
 }
 
 
 /* =========================
-   CULTIVATION LOG
+UPDATE
 ========================= */
 
-function addLog(message) {
+function update(){
 
-    const log =
-        document.getElementById("log");
+document.getElementById("qiText")
+.innerText=
+qi+" / "+maxQi;
 
-    const entry =
-        document.createElement("div");
+document.getElementById("qiBar")
+.style.width=
+((qi/maxQi)*100)+"%";
 
-    entry.className =
-        "log-entry";
+document.getElementById("realm")
+.innerText=
+realms[realmIndex]+
+" — "+
+stage+
+"th Stage";
 
-    const time =
-        new Date().toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit"
-        });
+document.getElementById("power")
+.innerText=
+power;
 
-    entry.innerText =
-        "[" + time + "] " + message;
+document.getElementById("cultivation")
+.innerText=
+cultivation;
 
-    log.prepend(entry);
+document.getElementById("breakthroughs")
+.innerText=
+breakthroughs;
+
+const technique =
+techniques[
+Math.min(
+techniqueLevel-1,
+techniques.length-1
+)
+];
+
+document.getElementById("techniqueName")
+.innerText=
+technique.name;
+
+document.getElementById("techniqueDescription")
+.innerText=
+technique.description;
+
+}
+
+
+/* =========================
+LOG
+========================= */
+
+function addLog(message){
+
+const log =
+document.getElementById("log");
+
+const entry =
+document.createElement("div");
+
+entry.className="log-entry";
+
+const time =
+new Date().toLocaleTimeString([],{
+hour:"2-digit",
+minute:"2-digit"
+});
+
+entry.innerText=
+"["+time+"] "+message;
+
+log.prepend(entry);
 
 }
 
 </script>
 
 </body>
-</html>
+    </html>
