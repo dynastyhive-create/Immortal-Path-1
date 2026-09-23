@@ -1,252 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Immortal Path</title>
 
-    <title>Immortal Path</title>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <!-- Telegram Mini App -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+body {
+    font-family: Georgia, serif;
+    background: radial-gradient(circle at top, #20243a, #080910 70%);
+    color: #eee;
+    min-height: 100vh;
+    padding: 20px;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+.container {
+    max-width: 500px;
+    margin: auto;
+}
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
-            background:
-                radial-gradient(circle at top, #18243d 0%, #080b13 45%, #030407 100%);
-            color: white;
-        }
+.title {
+    text-align: center;
+    margin-bottom: 25px;
+}
 
-        .app {
-            width: 100%;
-            max-width: 480px;
-            margin: auto;
-            padding: 20px 16px 30px;
-        }
+.title h1 {
+    font-size: 34px;
+    letter-spacing: 3px;
+}
 
-        .header {
-            text-align: center;
-            padding: 15px 0 25px;
-        }
+.title p {
+    color: #aaa;
+    margin-top: 8px;
+    font-size: 14px;
+}
 
-        .header h1 {
-            margin: 0;
-            font-size: 32px;
-            letter-spacing: 2px;
-        }
+.card {
+    background: rgba(20, 22, 35, 0.95);
+    border: 1px solid #393d58;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
 
-        .header p {
-            margin: 8px 0 0;
-            color: #9fa9bd;
-            font-size: 14px;
-        }
+.character {
+    text-align: center;
+}
 
-        .card {
-            background: rgba(15, 20, 34, 0.88);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 18px;
-            padding: 18px;
-            margin-bottom: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-        }
+.avatar {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    background: #292d46;
+    border: 2px solid #777da5;
+}
 
-        .profile {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+.name {
+    font-size: 22px;
+    margin-top: 12px;
+}
 
-        .avatar {
-            width: 62px;
-            height: 62px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #d4af37, #765d13);
-            font-size: 28px;
-        }
+.realm {
+    color: #b8a5ff;
+    margin-top: 5px;
+}
 
-        .profile h2 {
-            margin: 0;
-            font-size: 20px;
-        }
+.progress-container {
+    margin-top: 18px;
+}
 
-        .profile p {
-            margin: 5px 0 0;
-            color: #aeb7c9;
-            font-size: 13px;
-        }
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 7px;
+}
 
-        .realm {
-            text-align: center;
-        }
+.progress {
+    height: 12px;
+    background: #0c0d14;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-        .realm-title {
-            color: #c9a94b;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #7057d9, #bda9ff);
+    transition: width 0.4s;
+}
 
-        .realm-name {
-            font-size: 25px;
-            font-weight: bold;
-            margin: 8px 0;
-        }
+.buttons {
+    display: grid;
+    gap: 12px;
+}
 
-        .qi-text {
-            display: flex;
-            justify-content: space-between;
-            color: #aeb7c9;
-            font-size: 13px;
-            margin-bottom: 8px;
-        }
+button {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    background: #343952;
+}
 
-        .progress {
-            width: 100%;
-            height: 12px;
-            background: #252b39;
-            border-radius: 20px;
-            overflow: hidden;
-        }
+button:active {
+    transform: scale(0.98);
+}
 
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #8b6b19, #f0d36b);
-            border-radius: 20px;
-            transition: width 0.3s ease;
-        }
+.cultivate {
+    background: linear-gradient(135deg, #5541a8, #8066e8);
+}
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
+.breakthrough {
+    background: linear-gradient(135deg, #8c5b25, #c68a3d);
+}
 
-        .stat {
-            text-align: center;
-            background: rgba(255,255,255,0.04);
-            padding: 12px 5px;
-            border-radius: 12px;
-        }
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
 
-        .stat-value {
-            font-size: 18px;
-            font-weight: bold;
-        }
+.stat {
+    text-align: center;
+    background: #11131e;
+    border-radius: 12px;
+    padding: 13px 5px;
+}
 
-        .stat-label {
-            color: #8993a8;
-            font-size: 11px;
-            margin-top: 4px;
-        }
+.stat-value {
+    font-size: 20px;
+    font-weight: bold;
+}
 
-        button {
-            width: 100%;
-            border: none;
-            border-radius: 14px;
-            padding: 15px;
-            margin-top: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            color: white;
-        }
+.stat-label {
+    color: #999;
+    font-size: 11px;
+    margin-top: 5px;
+}
 
-        .cultivate {
-            background: linear-gradient(135deg, #b78b25, #e0bd58);
-            color: #111;
-        }
+.log {
+    max-height: 180px;
+    overflow-y: auto;
+}
 
-        .breakthrough {
-            background: linear-gradient(135deg, #382c66, #6549b7);
-        }
+.log-entry {
+    border-bottom: 1px solid #292c3d;
+    padding: 9px 0;
+    font-size: 13px;
+    color: #bbb;
+}
 
-        button:active {
-            transform: scale(0.98);
-        }
-
-        .log {
-            color: #9fa9bd;
-            font-size: 13px;
-            line-height: 1.6;
-            min-height: 22px;
-        }
-
-        .footer {
-            text-align: center;
-            color: #555f73;
-            font-size: 11px;
-            margin-top: 20px;
-        }
-    </style>
+.footer {
+    text-align: center;
+    color: #666;
+    font-size: 11px;
+    margin-top: 25px;
+}
+</style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="container">
 
-    <div class="header">
+    <div class="title">
         <h1>IMMORTAL PATH</h1>
         <p>Walk the path of cultivation.</p>
     </div>
 
-    <div class="card profile">
+    <div class="card character">
+
         <div class="avatar">☯</div>
 
-        <div>
-            <h2 id="playerName">Unnamed Cultivator</h2>
-            <p>Seeker of the Immortal Dao</p>
-        </div>
-    </div>
+        <div class="name">Nameless Cultivator</div>
 
-    <div class="card realm">
-
-        <div class="realm-title">Current Realm</div>
-
-        <div class="realm-name" id="realmName">
-            Qi Condensation
+        <div class="realm" id="realm">
+            Qi Condensation — Early Stage
         </div>
 
-        <div class="qi-text">
-            <span>Qi Progress</span>
-            <span id="qiText">0 / 100</span>
+        <div class="progress-container">
+
+            <div class="progress-text">
+                <span>Qi</span>
+                <span id="qiText">0 / 100</span>
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar" id="qiBar"></div>
+            </div>
+
         </div>
-
-        <div class="progress">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-
-        <button class="cultivate" onclick="cultivate()">
-            🧘 Cultivate
-        </button>
-
-        <button class="breakthrough" onclick="breakthrough()">
-            ⚡ Attempt Breakthrough
-        </button>
 
     </div>
 
     <div class="card">
 
+        <div class="buttons">
+
+            <button class="cultivate" onclick="cultivate()">
+                ⚡ Cultivate
+            </button>
+
+            <button class="breakthrough" onclick="breakthrough()">
+                ☯ Attempt Breakthrough
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Attributes</h3>
+
         <div class="stats">
 
             <div class="stat">
-                <div class="stat-value" id="power">1</div>
+                <div class="stat-value" id="power">10</div>
                 <div class="stat-label">POWER</div>
             </div>
 
             <div class="stat">
-                <div class="stat-value" id="cultivations">0</div>
-                <div class="stat-label">CULTIVATIONS</div>
+                <div class="stat-value" id="cultivation">0</div>
+                <div class="stat-label">CULTIVATION</div>
             </div>
 
             <div class="stat">
@@ -260,139 +255,150 @@
 
     <div class="card">
 
-        <strong>📜 Dao Log</strong>
+        <h3>Cultivation Log</h3>
 
         <div class="log" id="log">
-            Your journey begins...
+            <div class="log-entry">
+                Your journey has begun...
+            </div>
         </div>
 
     </div>
 
     <div class="footer">
-        Immortal Path • Cultivate Beyond Mortality
+        Immortal Path • Prototype
     </div>
 
 </div>
 
 <script>
 
-    // Telegram Mini App
-    const tg = window.Telegram.WebApp;
+let qi = 0;
+let maxQi = 100;
+let power = 10;
+let cultivation = 0;
+let breakthroughs = 0;
 
-    if (tg) {
-        tg.ready();
-        tg.expand();
+let realmIndex = 0;
+
+const realms = [
+    "Qi Condensation — Early Stage",
+    "Foundation Establishment",
+    "Core Formation",
+    "Nascent Soul",
+    "Soul Formation",
+    "Ascendant",
+    "Immortal"
+];
+
+function cultivate() {
+
+    let gain = Math.floor(Math.random() * 31) + 20;
+
+    qi += gain;
+    cultivation += gain;
+
+    if (qi > maxQi) {
+        qi = maxQi;
     }
 
-    let qi = 0;
-    let power = 1;
-    let cultivations = 0;
-    let breakthroughs = 0;
+    update();
 
-    const realms = [
-        "Qi Condensation",
-        "Foundation Establishment",
-        "Core Formation",
-        "Nascent Soul",
-        "Soul Formation",
-        "Spirit Severing",
-        "Void Tribulant",
-        "Ascendant",
-        "Immortal"
-    ];
+    addLog(
+        "You cultivated and gained " + gain + " Qi."
+    );
+}
 
-    let realmIndex = 0;
+function breakthrough() {
 
-    function cultivate() {
+    if (realmIndex >= realms.length - 1) {
 
-        const gain = Math.floor(Math.random() * 11) + 5;
+        addLog("You have reached the Immortal Realm.");
 
-        qi += gain;
-        cultivations++;
-
-        document.getElementById("log").innerText =
-            "You circulate your Qi and gain +" + gain + " cultivation energy.";
-
-        updateUI();
-
-        if (qi >= 100) {
-            qi = 100;
-
-            document.getElementById("log").innerText =
-                "Your cultivation has reached its current limit. Attempt a breakthrough.";
-            
-            updateUI();
-        }
+        return;
     }
 
-    function breakthrough() {
+    if (qi < maxQi) {
 
-        if (qi < 100) {
+        addLog(
+            "Your Qi is not sufficient for a breakthrough."
+        );
 
-            document.getElementById("log").innerText =
-                "Your foundation is not ready. Reach 100 Qi first.";
+        return;
+    }
 
-            return;
-        }
+    let chance = Math.random();
 
-        if (realmIndex >= realms.length - 1) {
-
-            document.getElementById("log").innerText =
-                "You have reached the peak of the Immortal Path.";
-
-            return;
-        }
+    if (chance < 0.70) {
 
         realmIndex++;
 
         qi = 0;
 
-        power += 10;
-
         breakthroughs++;
 
-        document.getElementById("log").innerText =
+        power += 25;
+
+        maxQi += 100;
+
+        addLog(
             "BREAKTHROUGH SUCCESSFUL! You entered " +
-            realms[realmIndex] + ".";
+            realms[realmIndex] + "."
+        );
 
-        updateUI();
+    } else {
+
+        qi = Math.floor(qi * 0.5);
+
+        addLog(
+            "Breakthrough failed. Your Qi was damaged."
+        );
     }
 
-    function updateUI() {
+    update();
+}
 
-        document.getElementById("qiText").innerText =
-            qi + " / 100";
+function update() {
 
-        document.getElementById("progressBar").style.width =
-            qi + "%";
+    document.getElementById("qiText").innerText =
+        qi + " / " + maxQi;
 
-        document.getElementById("realmName").innerText =
-            realms[realmIndex];
+    document.getElementById("qiBar").style.width =
+        ((qi / maxQi) * 100) + "%";
 
-        document.getElementById("power").innerText =
-            power;
+    document.getElementById("realm").innerText =
+        realms[realmIndex];
 
-        document.getElementById("cultivations").innerText =
-            cultivations;
+    document.getElementById("power").innerText =
+        power;
 
-        document.getElementById("breakthroughs").innerText =
-            breakthroughs;
-    }
+    document.getElementById("cultivation").innerText =
+        cultivation;
 
-    // Try to get the Telegram user's name
-    if (
-        tg &&
-        tg.initDataUnsafe &&
-        tg.initDataUnsafe.user
-    ) {
+    document.getElementById("breakthroughs").innerText =
+        breakthroughs;
+}
 
-        const user = tg.initDataUnsafe.user;
+function addLog(message) {
 
-        document.getElementById("playerName").innerText =
-            user.first_name || "Cultivator";
-    }
+    const log = document.getElementById("log");
 
-    updateUI();
+    const entry = document.createElement("div");
+
+    entry.className = "log-entry";
+
+    let time = new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+    entry.innerText =
+        "[" + time + "] " + message;
+
+    log.prepend(entry);
+}
+
+update();
 
 </script>
 
