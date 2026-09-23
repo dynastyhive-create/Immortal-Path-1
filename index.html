@@ -3,263 +3,199 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Immortal Path</title>
 
 <style>
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 body {
-    font-family: Georgia, serif;
-    background: radial-gradient(circle at top, #272b48, #090a11 65%);
-    color: #eee;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at top, #26345c 0%, #0b1020 45%, #05070e 100%);
+    color: white;
     min-height: 100vh;
-    padding: 20px;
 }
 
 .container {
-    max-width: 500px;
+    width: 92%;
+    max-width: 650px;
     margin: auto;
+    padding: 25px 0 50px;
 }
 
-.title {
+h1 {
     text-align: center;
-    margin: 15px 0 25px;
-}
-
-.title h1 {
     font-size: 34px;
-    letter-spacing: 4px;
-    text-shadow: 0 0 18px rgba(160,140,255,.45);
+    margin-bottom: 5px;
 }
 
-.title p {
-    color: #aaa;
-    margin-top: 8px;
-    font-size: 14px;
+.subtitle {
+    text-align: center;
+    color: #aeb9d8;
+    margin-bottom: 25px;
 }
 
 .card {
-    background: rgba(17,19,31,.97);
-    border: 1px solid #393e5c;
+    background: rgba(20, 27, 48, 0.92);
+    border: 1px solid rgba(130, 150, 210, 0.25);
     border-radius: 18px;
     padding: 20px;
-    margin-bottom: 16px;
-    box-shadow: 0 12px 30px rgba(0,0,0,.35);
+    margin-bottom: 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
 }
 
-.character {
-    text-align: center;
-}
-
-.avatar {
-    width: 82px;
-    height: 82px;
-    margin: auto;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 38px;
-    background: radial-gradient(circle, #454b73, #1c1f32);
-    border: 2px solid #8c83c9;
-}
-
-.name {
-    font-size: 23px;
-    margin-top: 13px;
-}
-
-.realm {
-    color: #b8a5ff;
-    margin-top: 6px;
-}
-
-.progress-container {
-    margin-top: 18px;
-}
-
-.progress-text {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: #aaa;
-    margin-bottom: 7px;
-}
-
-.progress {
-    height: 12px;
-    background: #090a10;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg,#6550d0,#c0adff);
-    transition: width .35s;
-}
-
-.buttons {
-    display: grid;
-    gap: 12px;
-}
-
-button {
-    width: 100%;
-    border: 0;
-    border-radius: 12px;
-    padding: 16px;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:active {
-    transform: scale(.98);
-}
-
-.cultivate {
-    background: linear-gradient(135deg,#5541a8,#8066e8);
-}
-
-.breakthrough {
-    background: linear-gradient(135deg,#8c5b25,#c68a3d);
-}
-
-.technique {
-    background: linear-gradient(135deg,#246b68,#359b95);
-}
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.stat {
-    text-align: center;
-    background: #10121d;
-    border-radius: 12px;
-    padding: 13px 5px;
-}
-
-.stat-value {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.stat-label {
-    color: #999;
-    font-size: 11px;
-    margin-top: 5px;
-}
-
-.technique-box {
-    background: #10131f;
-    border: 1px solid #303650;
-    border-radius: 12px;
-    padding: 15px;
-    margin-top: 12px;
-}
-
-.technique-name {
-    color: #7de0d7;
-    font-size: 18px;
-}
-
-.technique-desc {
-    color: #999;
-    font-size: 12px;
-    margin-top: 6px;
-}
-
-.log {
-    max-height: 190px;
-    overflow-y: auto;
-}
-
-.log-entry {
-    border-bottom: 1px solid #292c3d;
-    padding: 9px 0;
-    font-size: 13px;
-    color: #bbb;
-}
-
-.footer {
-    text-align: center;
-    color: #666;
-    font-size: 11px;
-    margin: 25px 0;
-}
-
-.creation {
-    display: none;
-}
-
-.creation h2 {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.creation-subtitle {
-    text-align: center;
-    color: #999;
-    font-size: 13px;
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    color: #bbb;
-    font-size: 13px;
-    margin-bottom: 7px;
+.card h2 {
+    margin-top: 0;
 }
 
 input {
     width: 100%;
     padding: 14px;
     border-radius: 10px;
-    border: 1px solid #3d4260;
-    background: #0b0d16;
-    color: white;
+    border: none;
+    margin: 10px 0;
     font-size: 16px;
-    outline: none;
-    margin-bottom: 16px;
 }
 
-.talent-box {
-    background: #0d0f1a;
-    border: 1px solid #353a54;
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
     border-radius: 12px;
-    padding: 15px;
-    text-align: center;
-    margin-bottom: 16px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #7d5cff;
+    color: white;
 }
 
-.talent-name {
-    font-size: 20px;
-    color: #c2b4ff;
-    margin: 7px 0;
+button:hover {
+    opacity: 0.9;
 }
 
-.talent-description {
-    font-size: 12px;
-    color: #999;
+button:disabled {
+    background: #41485e;
+    color: #9da3b8;
+    cursor: not-allowed;
 }
 
-.begin {
-    background: linear-gradient(135deg,#5a3bb8,#9a70ed);
+.secondary {
+    background: #26304d;
+}
+
+.danger {
+    background: #7d2633;
 }
 
 .hidden {
     display: none;
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    color: #cbd3ec;
+}
+
+.stat strong {
+    color: white;
+}
+
+.realm {
+    text-align: center;
+    font-size: 26px;
+    color: #d6c4ff;
+    margin: 5px 0;
+}
+
+.stage {
+    text-align: center;
+    color: #9fb1dd;
+    font-size: 17px;
+}
+
+.progress-container {
+    width: 100%;
+    height: 22px;
+    background: #101525;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #6845ff, #b678ff);
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    text-align: center;
+    color: #bfc9e8;
+}
+
+.exercise {
+    background: #101728;
+    border-radius: 14px;
+    padding: 15px;
+    margin: 10px 0;
+    border-left: 4px solid #8065ff;
+}
+
+.exercise-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.exercise-target {
+    color: #b7c1df;
+    margin-top: 5px;
+}
+
+.warning {
+    color: #ffcf70;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.success {
+    color: #72e6a5;
+}
+
+.streak {
+    text-align: center;
+    font-size: 21px;
+    color: #ffcf70;
+}
+
+.talent {
+    text-align: center;
+    color: #d7c7ff;
+    font-size: 18px;
+}
+
+.date {
+    text-align: center;
+    color: #929dbd;
+    font-size: 14px;
+}
+
+.breakthrough {
+    background: linear-gradient(90deg, #8b5cf6, #c084fc);
+}
+
+footer {
+    text-align: center;
+    color: #66708e;
+    font-size: 12px;
+    margin-top: 25px;
 }
 </style>
 </head>
@@ -268,726 +204,847 @@ input {
 
 <div class="container">
 
-<div class="title">
-<h1>IMMORTAL PATH</h1>
-<p>Walk the path of cultivation.</p>
-</div>
+    <h1>☯ Immortal Path</h1>
+    <div class="subtitle">Walk the path. Temper the body. Refine the spirit.</div>
 
-<!-- CHARACTER CREATION -->
+    <!-- CHARACTER CREATION -->
+    <div id="creationScreen" class="card">
 
-<div class="card creation" id="creationScreen">
+        <h2>⚔️ Begin Your Journey</h2>
 
-<h2>Begin Your Journey</h2>
+        <p>
+            Every immortal begins as a mortal.
+            Your journey starts with your body, discipline and determination.
+        </p>
 
-<div class="creation-subtitle">
-Every immortal begins as a mortal.
-</div>
+        <input
+            id="nameInput"
+            type="text"
+            placeholder="Enter your cultivator name"
+            maxlength="20"
+        >
 
-<label for="playerName">Cultivator Name</label>
+        <button onclick="createCharacter()">
+            Begin Cultivation
+        </button>
 
-<input id="playerName"
-type="text"
-placeholder="Enter your name..."
-maxlength="20">
+    </div>
 
-<div class="talent-box">
 
-<div>Innate Talent</div>
+    <!-- MAIN GAME -->
+    <div id="gameScreen" class="hidden">
 
-<div class="talent-name" id="talentName">
-Unknown
-</div>
+        <!-- CHARACTER -->
+        <div class="card">
 
-<div class="talent-description" id="talentDescription">
-Your destiny has not yet been revealed.
-</div>
+            <h2>🧙 Cultivator</h2>
 
-</div>
+            <div class="stat">
+                <span>Name</span>
+                <strong id="playerName"></strong>
+            </div>
 
-<button class="begin" onclick="beginJourney()">
-✨ Begin Journey
-</button>
+            <div class="talent">
+                ✨ <span id="playerTalent"></span>
+            </div>
 
-</div>
+            <div class="streak">
+                🔥 <span id="streak">0</span> Day Streak
+            </div>
 
+        </div>
 
-<!-- GAME -->
 
-<div id="gameScreen" class="hidden">
+        <!-- CULTIVATION -->
+        <div class="card">
 
-<div class="card character">
+            <h2>☯ Cultivation Realm</h2>
 
-<div class="avatar">☯</div>
+            <div class="realm" id="realmName"></div>
 
-<div class="name" id="playerDisplay">
-Cultivator
-</div>
+            <div class="stage" id="stageName"></div>
 
-<div class="realm" id="realm">
-Qi Condensation — 1st Stage
-</div>
+            <br>
 
-<div class="progress-container">
+            <div class="stat">
+                <span>Cultivation Time</span>
+                <strong id="requiredTime"></strong>
+            </div>
 
-<div class="progress-text">
+            <div class="stat">
+                <span>Current Progress</span>
+                <strong id="dayProgress"></strong>
+            </div>
 
-<span>Qi</span>
+            <div class="progress-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
 
-<span id="qiText">
-0 / 100
-</span>
+            <div class="progress-text" id="progressPercent">
+                0%
+            </div>
 
-</div>
+        </div>
 
-<div class="progress">
 
-<div class="progress-bar" id="qiBar"></div>
+        <!-- DAILY TRIAL -->
+        <div class="card">
 
-</div>
+            <h2>🔥 Today's Cultivation Trial</h2>
 
-</div>
+            <p class="date" id="todayDate"></p>
 
-</div>
+            <p>
+                Your cultivation will advance only after you complete
+                today's physical training.
+            </p>
 
+            <div id="exerciseList"></div>
 
-<!-- ACTIONS -->
+            <p class="warning">
+                ⚠️ Perform the exercises safely. Stop if you experience
+                pain, dizziness, or unusual discomfort. The app relies on
+                your honest confirmation that the training was completed.
+            </p>
 
-<div class="card">
+            <button
+                id="completeTrainingButton"
+                onclick="completeTraining()"
+            >
+                I Completed Today's Training
+            </button>
 
-<div class="buttons">
+            <div id="completionMessage"></div>
 
-<button class="cultivate"
-onclick="cultivate()">
+        </div>
 
-⚡ Cultivate
 
-</button>
+        <!-- BREAKTHROUGH -->
+        <div class="card">
 
-<button class="breakthrough"
-onclick="breakthrough()">
+            <h2>🌌 Breakthrough</h2>
 
-☯ Attempt Breakthrough
+            <p id="breakthroughDescription">
+                Continue your daily cultivation until your body and spirit
+                are ready for the next stage.
+            </p>
 
-</button>
+            <button
+                id="breakthroughButton"
+                class="breakthrough"
+                onclick="breakthrough()"
+                disabled
+            >
+                🔒 Breakthrough Locked
+            </button>
 
-</div>
+        </div>
 
-</div>
 
+        <!-- INFORMATION -->
+        <div class="card">
 
-<!-- TECHNIQUE -->
+            <h2>📜 Cultivation Law</h2>
 
-<div class="card">
+            <p>
+                Every stage requires discipline.
+                The longer you cultivate, the greater the physical trial.
+            </p>
 
-<h3>📜 Cultivation Technique</h3>
+            <p>
+                Each new stage requires <strong>one additional month</strong>
+                of daily cultivation.
+            </p>
 
-<div class="technique-box">
+            <p>
+                Your progress is measured by completed training days.
+            </p>
 
-<div class="technique-name" id="techniqueName">
-Mortal Breathing Art
-</div>
+        </div>
 
-<div class="technique-desc" id="techniqueDescription">
-A simple breathing technique used by ordinary cultivators.
-</div>
 
-</div>
+        <!-- RESET -->
+        <div class="card">
 
-<button class="technique"
-onclick="trainTechnique()">
+            <button class="danger" onclick="resetJourney()">
+                Reset Cultivator
+            </button>
 
-🔥 Train Technique
+        </div>
 
-</button>
+    </div>
 
-</div>
-
-
-<!-- STATS -->
-
-<div class="card">
-
-<h3>Attributes</h3>
-
-<div class="stats">
-
-<div class="stat">
-
-<div class="stat-value"
-id="power">
-10
-</div>
-
-<div class="stat-label">
-POWER
-</div>
-
-</div>
-
-<div class="stat">
-
-<div class="stat-value"
-id="cultivation">
-0
-</div>
-
-<div class="stat-label">
-CULTIVATION
-</div>
-
-</div>
-
-<div class="stat">
-
-<div class="stat-value"
-id="breakthroughs">
-0
-</div>
-
-<div class="stat-label">
-BREAKTHROUGHS
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- LOG -->
-
-<div class="card">
-
-<h3>Cultivation Log</h3>
-
-<div class="log"
-id="log">
-
-<div class="log-entry">
-Your journey has begun...
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="footer">
-Immortal Path • Cultivation Prototype
-</div>
+    <footer>
+        Immortal Path • Cultivation begins with discipline.
+    </footer>
 
 </div>
 
 
 <script>
 
-/* =========================
-GAME VARIABLES
-========================= */
-
-let qi = 0;
-
-let maxQi = 100;
-
-let power = 10;
-
-let cultivation = 0;
-
-let breakthroughs = 0;
-
-let realmIndex = 0;
-
-let stage = 1;
-
-let techniqueLevel = 1;
-
-let playerName = "";
-
-let talent = null;
-
-
-/* =========================
-REALMS
-========================= */
+/* =========================================
+   CULTIVATION SYSTEM
+========================================= */
 
 const realms = [
-
-"Qi Condensation",
-
-"Foundation Establishment",
-
-"Core Formation",
-
-"Nascent Soul",
-
-"Soul Formation",
-
-"Ascendant",
-
-"Immortal"
-
+    "Qi Condensation",
+    "Foundation Establishment",
+    "Core Formation",
+    "Nascent Soul",
+    "Soul Formation",
+    "Ascendant",
+    "Immortal"
 ];
 
+const stagesPerRealm = 9;
 
-/* =========================
-TALENTS
-========================= */
+
+/* =========================================
+   TALENTS
+========================================= */
 
 const talents = [
-
-{
-name:"Mortal Talent",
-description:"An ordinary talent. The path ahead will be difficult.",
-multiplier:1
-},
-
-{
-name:"Spiritual Root",
-description:"Your cultivation speed is slightly increased.",
-multiplier:1.25
-},
-
-{
-name:"Heavenly Root",
-description:"A rare talent blessed by the heavens.",
-multiplier:1.5
-},
-
-{
-name:"Ancient Bloodline",
-description:"An ancient power sleeps within your blood.",
-multiplier:1.75
-},
-
-{
-name:"Immortal Physique",
-description:"A legendary physique rarely seen in history.",
-multiplier:2
-}
-
+    {
+        name: "Mortal Talent",
+        multiplier: 1
+    },
+    {
+        name: "Spiritual Root",
+        multiplier: 1.25
+    },
+    {
+        name: "Heavenly Root",
+        multiplier: 1.5
+    },
+    {
+        name: "Ancient Bloodline",
+        multiplier: 1.75
+    },
+    {
+        name: "Immortal Physique",
+        multiplier: 2
+    }
 ];
 
 
-/* =========================
-TECHNIQUES
-========================= */
+/* =========================================
+   STORAGE
+========================================= */
 
-const techniques = [
+const STORAGE_KEY = "immortalPath_v2";
 
-{
-name:"Mortal Breathing Art",
-description:"A simple breathing technique.",
-bonus:1
-},
 
-{
-name:"Spirit Gathering Art",
-description:"Absorbs spiritual energy more efficiently.",
-bonus:1.2
-},
+let player = null;
 
-{
-name:"Heavenly Qi Scripture",
-description:"A powerful cultivation scripture.",
-bonus:1.5
-},
 
-{
-name:"Ancient Immortal Scripture",
-description:"A forbidden scripture of the ancient immortals.",
-bonus:2
-}
+/* =========================================
+   EXERCISE SYSTEM
+========================================= */
 
+/*
+    The exercises become harder as the cultivator
+    advances through the realms.
+
+    These remain realistic bodyweight exercises.
+*/
+
+const exercisePlans = [
+
+    /* Qi Condensation */
+    [
+        [
+            ["Bodyweight Squats", "10 reps"]
+        ],
+        [
+            ["Bodyweight Squats", "15 reps"]
+        ],
+        [
+            ["Push-ups", "5 reps"]
+        ],
+        [
+            ["Bodyweight Squats", "20 reps"]
+        ],
+        [
+            ["Push-ups", "8 reps"]
+        ],
+        [
+            ["Plank", "20 seconds"]
+        ],
+        [
+            ["Reverse Lunges", "10 reps total"]
+        ],
+        [
+            ["Push-ups", "10 reps"]
+        ],
+        [
+            ["Squats", "20 reps"],
+            ["Push-ups", "10 reps"]
+        ]
+    ],
+
+    /* Foundation Establishment */
+    [
+        [
+            ["Squats", "25 reps"],
+            ["Push-ups", "10 reps"]
+        ],
+        [
+            ["Reverse Lunges", "16 reps total"],
+            ["Plank", "30 seconds"]
+        ],
+        [
+            ["Push-ups", "12 reps"],
+            ["Squats", "25 reps"]
+        ],
+        [
+            ["Mountain Climbers", "20 reps"],
+            ["Plank", "30 seconds"]
+        ],
+        [
+            ["Squats", "30 reps"],
+            ["Push-ups", "12 reps"]
+        ],
+        [
+            ["Lunges", "20 reps total"],
+            ["Plank", "40 seconds"]
+        ],
+        [
+            ["Push-ups", "15 reps"],
+            ["Squats", "30 reps"]
+        ],
+        [
+            ["Mountain Climbers", "30 reps"],
+            ["Push-ups", "12 reps"]
+        ],
+        [
+            ["Squats", "35 reps"],
+            ["Plank", "45 seconds"]
+        ]
+    ],
+
+    /* Core Formation */
+    [
+        [
+            ["Squats", "40 reps"],
+            ["Push-ups", "15 reps"]
+        ],
+        [
+            ["Lunges", "24 reps total"],
+            ["Plank", "45 seconds"]
+        ],
+        [
+            ["Push-ups", "18 reps"],
+            ["Mountain Climbers", "30 reps"]
+        ],
+        [
+            ["Squats", "45 reps"],
+            ["Plank", "60 seconds"]
+        ],
+        [
+            ["Push-ups", "20 reps"],
+            ["Lunges", "24 reps total"]
+        ],
+        [
+            ["Mountain Climbers", "40 reps"],
+            ["Plank", "60 seconds"]
+        ],
+        [
+            ["Squats", "50 reps"],
+            ["Push-ups", "20 reps"]
+        ],
+        [
+            ["Lunges", "30 reps total"],
+            ["Mountain Climbers", "40 reps"]
+        ],
+        [
+            ["Push-ups", "25 reps"],
+            ["Plank", "75 seconds"]
+        ]
+    ],
+
+    /* Nascent Soul */
+    [
+        [
+            ["Squats", "50 reps"],
+            ["Push-ups", "20 reps"],
+            ["Plank", "60 seconds"]
+        ],
+        [
+            ["Lunges", "30 reps total"],
+            ["Mountain Climbers", "40 reps"]
+        ],
+        [
+            ["Push-ups", "25 reps"],
+            ["Squats", "50 reps"]
+        ],
+        [
+            ["Plank", "75 seconds"],
+            ["Mountain Climbers", "50 reps"]
+        ],
+        [
+            ["Squats", "60 reps"],
+            ["Push-ups", "25 reps"]
+        ],
+        [
+            ["Lunges", "36 reps total"],
+            ["Plank", "90 seconds"]
+        ],
+        [
+            ["Push-ups", "30 reps"],
+            ["Mountain Climbers", "50 reps"]
+        ],
+        [
+            ["Squats", "70 reps"],
+            ["Plank", "90 seconds"]
+        ],
+        [
+            ["Push-ups", "30 reps"],
+            ["Lunges", "40 reps total"]
+        ]
+    ],
+
+    /* Soul Formation */
+    [
+        [
+            ["Squats", "60 reps"],
+            ["Push-ups", "25 reps"],
+            ["Plank", "75 seconds"]
+        ],
+        [
+            ["Lunges", "40 reps total"],
+            ["Mountain Climbers", "50 reps"]
+        ],
+        [
+            ["Push-ups", "30 reps"],
+            ["Squats", "60 reps"]
+        ],
+        [
+            ["Plank", "90 seconds"],
+            ["Mountain Climbers", "60 reps"]
+        ],
+        [
+            ["Squats", "70 reps"],
+            ["Push-ups", "30 reps"]
+        ],
+        [
+            ["Lunges", "44 reps total"],
+            ["Plank", "90 seconds"]
+        ],
+        [
+            ["Push-ups", "35 reps"],
+            ["Mountain Climbers", "60 reps"]
+        ],
+        [
+            ["Squats", "80 reps"],
+            ["Plank", "105 seconds"]
+        ],
+        [
+            ["Push-ups", "40 reps"],
+            ["Lunges", "50 reps total"]
+        ]
+    ],
+
+    /* Ascendant */
+    [
+        [
+            ["Squats", "70 reps"],
+            ["Push-ups", "30 reps"],
+            ["Plank", "90 seconds"]
+        ],
+        [
+            ["Lunges", "50 reps total"],
+            ["Mountain Climbers", "60 reps"]
+        ],
+        [
+            ["Push-ups", "35 reps"],
+            ["Squats", "70 reps"]
+        ],
+        [
+            ["Plank", "105 seconds"],
+            ["Mountain Climbers", "70 reps"]
+        ],
+        [
+            ["Squats", "80 reps"],
+            ["Push-ups", "35 reps"]
+        ],
+        [
+            ["Lunges", "60 reps total"],
+            ["Plank", "120 seconds"]
+        ],
+        [
+            ["Push-ups", "40 reps"],
+            ["Mountain Climbers", "70 reps"]
+        ],
+        [
+            ["Squats", "90 reps"],
+            ["Plank", "120 seconds"]
+        ],
+        [
+            ["Push-ups", "45 reps"],
+            ["Lunges", "60 reps total"]
+        ]
+    ],
+
+    /* Immortal */
+    [
+        [
+            ["Squats", "80 reps"],
+            ["Push-ups", "35 reps"],
+            ["Plank", "90 seconds"]
+        ],
+        [
+            ["Lunges", "60 reps total"],
+            ["Mountain Climbers", "70 reps"]
+        ],
+        [
+            ["Push-ups", "40 reps"],
+            ["Squats", "80 reps"]
+        ],
+        [
+            ["Plank", "120 seconds"],
+            ["Mountain Climbers", "80 reps"]
+        ],
+        [
+            ["Squats", "90 reps"],
+            ["Push-ups", "40 reps"]
+        ],
+        [
+            ["Lunges", "70 reps total"],
+            ["Plank", "120 seconds"]
+        ],
+        [
+            ["Push-ups", "45 reps"],
+            ["Mountain Climbers", "80 reps"]
+        ],
+        [
+            ["Squats", "100 reps"],
+            ["Plank", "120 seconds"]
+        ],
+        [
+            ["Push-ups", "50 reps"],
+            ["Lunges", "70 reps total"]
+        ]
+    ]
 ];
 
 
-/* =========================
-LOAD
-========================= */
+/* =========================================
+   CHARACTER CREATION
+========================================= */
 
-window.onload = function(){
+function createCharacter() {
 
-const savedName =
-localStorage.getItem("immortalPathName");
+    const nameInput =
+        document.getElementById("nameInput").value.trim();
 
-if(savedName){
+    if (!nameInput) {
+        alert("Enter a cultivator name first.");
+        return;
+    }
 
-playerName = savedName;
+    const talent =
+        talents[Math.floor(Math.random() * talents.length)];
 
-document.getElementById("creationScreen")
-.style.display="none";
+    player = {
 
-document.getElementById("gameScreen")
-.classList.remove("hidden");
+        name: nameInput,
 
-document.getElementById("playerDisplay")
-.innerText=playerName;
+        talent: talent.name,
 
-}
-else{
+        multiplier: talent.multiplier,
 
-document.getElementById("creationScreen")
-.style.display="block";
+        globalStage: 1,
 
-generateTalent();
+        completedDays: 0,
 
-}
+        streak: 0,
 
-update();
+        lastCompletedDate: "",
 
-};
+        breakthroughReady: false
 
+    };
 
-/* =========================
-TALENT
-========================= */
+    savePlayer();
 
-function generateTalent(){
-
-talent =
-talents[
-Math.floor(Math.random()*talents.length)
-];
-
-document.getElementById("talentName")
-.innerText=talent.name;
-
-document.getElementById("talentDescription")
-.innerText=talent.description;
+    showGame();
 
 }
 
 
-/* =========================
-BEGIN
-========================= */
+/* =========================================
+   SAVE / LOAD
+========================================= */
 
-function beginJourney(){
+function savePlayer() {
 
-const nameInput =
-document.getElementById("playerName")
-.value.trim();
-
-if(nameInput===""){
-
-alert("Please enter your cultivator name.");
-
-return;
-
-}
-
-playerName=nameInput;
-
-localStorage.setItem(
-"immortalPathName",
-playerName
-);
-
-document.getElementById("creationScreen")
-.style.display="none";
-
-document.getElementById("gameScreen")
-.classList.remove("hidden");
-
-document.getElementById("playerDisplay")
-.innerText=playerName;
-
-addLog(
-"Your cultivation journey has begun."
-);
-
-addLog(
-"Innate Talent: "+talent.name
-);
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(player)
+    );
 
 }
 
 
-/* =========================
-CULTIVATE
-========================= */
+function loadPlayer() {
 
-function cultivate(){
+    const saved =
+        localStorage.getItem(STORAGE_KEY);
 
-let baseGain =
-Math.floor(Math.random()*31)+20;
+    if (saved) {
 
-let techniqueBonus =
-techniques[
-Math.min(
-techniqueLevel-1,
-techniques.length-1
-)
-].bonus;
+        try {
 
-let gain =
-Math.floor(
-baseGain *
-talent.multiplier *
-techniqueBonus
-);
+            player = JSON.parse(saved);
 
-qi+=gain;
+            showGame();
 
-cultivation+=gain;
+        } catch {
 
-if(qi>maxQi){
+            localStorage.removeItem(STORAGE_KEY);
 
-qi=maxQi;
+        }
 
-}
-
-update();
-
-addLog(
-"You cultivated and gained "+
-gain+
-" Qi."
-);
+    }
 
 }
 
 
-/* =========================
-BREAKTHROUGH
-========================= */
+/* =========================================
+   CULTIVATION INFORMATION
+========================================= */
 
-function breakthrough(){
+function getRealmIndex() {
 
-if(stage>=9){
-
-if(realmIndex>=realms.length-1){
-
-addLog(
-"You have reached the Immortal Realm."
-);
-
-return;
-
-}
-
-let chance=Math.random();
-
-if(chance<0.65){
-
-realmIndex++;
-
-stage=1;
-
-qi=0;
-
-maxQi+=300;
-
-power+=100;
-
-breakthroughs++;
-
-addLog(
-"MAJOR BREAKTHROUGH!"
-);
-
-addLog(
-"You entered "+
-realms[realmIndex]+"."
-);
-
-}
-else{
-
-qi=Math.floor(qi*.5);
-
-addLog(
-"Major breakthrough failed."
-);
-
-}
-
-update();
-
-return;
+    return Math.floor(
+        (player.globalStage - 1) / stagesPerRealm
+    );
 
 }
 
 
-if(qi<maxQi){
+function getStageInRealm() {
 
-addLog(
-"Your Qi is not yet full."
-);
-
-return;
+    return (
+        ((player.globalStage - 1) % stagesPerRealm) + 1
+    );
 
 }
 
 
-let chance=Math.random();
+function getRequiredDays() {
 
-if(chance<0.70){
+    /*
+        Every new stage adds another month.
 
-stage++;
+        Stage 1 = 30 days
+        Stage 2 = 60 days
+        Stage 3 = 90 days
+        ...
+    */
 
-qi=0;
-
-maxQi+=50;
-
-power+=10;
-
-breakthroughs++;
-
-addLog(
-"Breakthrough successful!"
-);
-
-addLog(
-"Advanced to "+
-realms[realmIndex]+
-" — "+
-stage+
-"th Stage."
-);
-
-}
-else{
-
-qi=Math.floor(qi*.5);
-
-addLog(
-"Breakthrough failed. Qi damaged."
-);
-
-}
-
-update();
+    return player.globalStage * 30;
 
 }
 
 
-/* =========================
-TECHNIQUE TRAINING
-========================= */
+function getRequiredMonths() {
 
-function trainTechnique(){
-
-if(techniqueLevel>=techniques.length){
-
-addLog(
-"Your cultivation technique has reached its current limit."
-);
-
-return;
-
-}
-
-if(cultivation<500){
-
-addLog(
-"You need 500 total cultivation to comprehend a stronger technique."
-);
-
-return;
-
-}
-
-techniqueLevel++;
-
-power+=20;
-
-const technique =
-techniques[techniqueLevel-1];
-
-addLog(
-"Technique advanced to "+
-technique.name+"."
-);
-
-update();
+    return player.globalStage;
 
 }
 
 
-/* =========================
-UPDATE
-========================= */
+/* =========================================
+   DAILY EXERCISE
+========================================= */
 
-function update(){
+function getTodaysExercises() {
 
-document.getElementById("qiText")
-.innerText=
-qi+" / "+maxQi;
+    const realmIndex = getRealmIndex();
 
-document.getElementById("qiBar")
-.style.width=
-((qi/maxQi)*100)+"%";
+    const stageIndex = getStageInRealm() - 1;
 
-document.getElementById("realm")
-.innerText=
-realms[realmIndex]+
-" — "+
-stage+
-"th Stage";
+    const plan = exercisePlans[realmIndex];
 
-document.getElementById("power")
-.innerText=
-power;
+    const stagePlan =
+        plan[stageIndex];
 
-document.getElementById("cultivation")
-.innerText=
-cultivation;
+    const requiredDays =
+        getRequiredDays();
 
-document.getElementById("breakthroughs")
-.innerText=
-breakthroughs;
+    const day =
+        player.completedDays + 1;
 
-const technique =
-techniques[
-Math.min(
-techniqueLevel-1,
-techniques.length-1
-)
-];
+    const exerciseIndex =
+        (day - 1) % stagePlan.length;
 
-document.getElementById("techniqueName")
-.innerText=
-technique.name;
+    /*
+        The current stage's exercise rotation
+        is determined by the current cultivation day.
+    */
 
-document.getElementById("techniqueDescription")
-.innerText=
-technique.description;
+    return stagePlan[exerciseIndex];
 
 }
 
 
-/* =========================
-LOG
-========================= */
+/* =========================================
+   DATE
+========================================= */
 
-function addLog(message){
+function getToday() {
 
-const log =
-document.getElementById("log");
+    const date = new Date();
 
-const entry =
-document.createElement("div");
+    const year = date.getFullYear();
 
-entry.className="log-entry";
+    const month =
+        String(date.getMonth() + 1).padStart(2, "0");
 
-const time =
-new Date().toLocaleTimeString([],{
-hour:"2-digit",
-minute:"2-digit"
-});
+    const day =
+        String(date.getDate()).padStart(2, "0");
 
-entry.innerText=
-"["+time+"] "+message;
-
-log.prepend(entry);
+    return `${year}-${month}-${day}`;
 
 }
 
-</script>
 
-</body>
-    </html>
+function formatDate() {
+
+    return new Date().toLocaleDateString(
+        undefined,
+        {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        }
+    );
+
+}
+
+
+/* =========================================
+   DISPLAY GAME
+========================================= */
+
+function showGame() {
+
+    document
+        .getElementById("creationScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("gameScreen")
+        .classList.remove("hidden");
+
+    updateGame();
+
+}
+
+
+/* =========================================
+   UPDATE UI
+========================================= */
+
+function updateGame() {
+
+    if (!player) return;
+
+
+    const realmIndex =
+        getRealmIndex();
+
+    const stage =
+        getStageInRealm();
+
+    const requiredDays =
+        getRequiredDays();
+
+    const completedDays =
+        player.completedDays;
+
+
+    document.getElementById("playerName")
+        .textContent = player.name;
+
+    document.getElementById("playerTalent")
+        .textContent =
+        player.talent;
+
+
+    document.getElementById("streak")
+        .textContent =
+        player.streak;
+
+
+    document.getElementById("realmName")
+        .textContent =
+        realms[realmIndex] || "Transcendent Immortal";
+
+
+    document.getElementById("stageName")
+        .textContent =
+        `${getOrdinal(stage)} Stage`;
+
+
+    document.getElementById("requiredTime")
+        .textContent =
+        `${getRequiredMonths()} Month${getRequiredMonths() > 1 ? "s" : ""}`;
+
+
+    document.getElementById("dayProgress")
+        .textContent =
+        `${completedDays} / ${requiredDays} Days`;
+
+
+    const percent =
+        Math.min(
+            100,
+            (completedDays / requiredDays) * 100
+        );
+
+
+    document.getElementById("progressBar")
+        .style.width =
+        percent + "%";
+
+
+    document.getElementById("progressPercent")
+        .textContent =
+        `${percent.toFixed(1)}%`;
+
+
+    document.getElementById("todayDate")
+        .textContent =
+        formatDate();
+
+
+    updateExercises();
+
+    updateCompletionButton();
+
+    updateBreakthrough();
+
+}
+
+
+/* =========================================
+   EXERCISE DISPLAY
+========================================= */
+
+function updateExercises() {
+
+    const container =
+        document.getElementById("exerciseList");
+
+    container.innerHTML = "";
+
+
+    const exercises =
+        getTodaysExercises();
+
+
+    exercises.forEac
